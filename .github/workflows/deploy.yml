@@ -26,6 +26,7 @@ env:
 jobs:    
   Deployment:
     runs-on: ubuntu-latest
+    # Only run when its a closed PR + Merge, without any merge skip
     if: github.event.pull_request.merged == true || github.event.inputs.whatIf == 'true'
     environment: Development
     container:
