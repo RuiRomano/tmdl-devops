@@ -1,8 +1,6 @@
 {
-  "version": "0.12",
-  "created": "2022-05-25T15:24:03.2613259+01:00",
   "deployments": {
-    "Files": {
+    "Datasets": {
       "mode": "Dataset",
       "source": {
         "type": "Folder",
