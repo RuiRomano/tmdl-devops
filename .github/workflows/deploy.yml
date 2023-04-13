@@ -1,4 +1,4 @@
-name: Deploy-DEV
+name: Deploy
 
 # Run workflow when its a pull request from a branch named Relese/*
 on:
