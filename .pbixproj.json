@@ -16,6 +16,21 @@
         "dataset": {
           "replaceParameters": true,
           "deployEmbeddedReport": false
+        },
+        "refresh": {
+          "enabled": true,
+          "skipNewDataset": true,
+          "method": "XMLA",
+          "type": "Full",
+          "tracing": {
+            "enabled": true,
+            "logEvents": {
+              "filter": [
+                "*|TabularRefresh|Partition",
+                "*|ReadData|Partition"
+              ]
+            }
+          }
         }
       },
       "parameters": {        
