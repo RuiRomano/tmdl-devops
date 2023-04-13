@@ -25,7 +25,38 @@ Navigate to the folder and your model should be serialized using TMDL format:
 
 ![image](./.images/TMDLFolder.png)
 
-# Deploy to Workspace using pbi-tools
+# Deploy TMDL using pbi-tools
 
-This repo uses [pbi-tools](https://pbi.tools/) to deploy the dataset using TMDL to a Power BI Premium workspace
+You can use [pbi-tools](https://pbi.tools/) to deploy a dataset using TMDL to a Power BI Premium Workspace.
+
+You must create a [.pbixproj.json](./.pbixproj.json) deployment manifest and configure:
+
+- A service principal that will execute the deployment (learn more [here](https://pbi.tools/devops/release-branching-model/setup-powerbi.html))
+- Reference to the TMDL folder ('source' property)
+- Workspace environments (Dev, PRD,...)
+- Deployment options like parameters, display names, etc
+
+To deploy TMDL you just need to run the following cmdline:
+
+```console
+pbi-tools deploy . Datasets Development
+```
+
+![image](./.images/pbitools_deploy.png)
+
+# Github Actions / DevOps
+
+If you want to automate the deployment everytime, its possible to use [GitHub Workflows](https://docs.github.com/en/actions/using-workflows) or [Azure DevOps Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines) to run pbi-tools as a docker image.
+
+This repo includes a sample GitHub Workflow that deploys TMDL to a Premium Workspace everytime there is a PullRequest into Main: [deploy.yml](./.github/workflows/deploy.yml)
+
+![image](./.images/GitHubWorkflowDeploy1.png)
+
+# Deploy TMDL using Powershell
+
+See the following repo with an example on how to publish an serialize into TMDL using Powershell:
+
+https://github.com/RuiRomano/tmdl-ps
+
+
 
