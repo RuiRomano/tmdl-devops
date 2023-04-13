@@ -10,7 +10,6 @@ model Model
 	sourceQueryCulture: en-US
 	storageLocation: ""
 
-
 queryGroup 'Raw Data'
 
 	annotation PBI_QueryGroupOrder = 0
