@@ -61,7 +61,7 @@ table Store
 
 		annotation SummarizationSetBy = Automatic
 
-	column Store
+	column StoreX
 		dataType: String
 		isDataTypeInferred: false
 		isDefaultLabel
