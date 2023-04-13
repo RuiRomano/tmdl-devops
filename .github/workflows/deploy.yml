@@ -26,7 +26,7 @@ env:
 jobs:    
   Deployment:
     runs-on: ubuntu-latest
-    # if: startsWith(github.head_ref, 'releases/') || github.event.inputs.whatIf == 'true'
+    if: github.event.pull_request.merged == true || github.event.inputs.whatIf == 'true'
     environment: Development
     container:
       image: ghcr.io/pbi-tools/pbi-tools-core:latest
