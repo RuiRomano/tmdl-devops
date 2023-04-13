@@ -1,0 +1,118 @@
+/// Store metadata
+table Store
+	lineageTag: 54d5f884-12db-4e03-a120-08cd725db2c4
+	ordinal: 7
+
+	partition 'Store-c0e5ba98-f95a-4712-91ec-71c7dc35e177' = M
+		mode: Import
+		attributes: ""
+		expression:=
+			let
+			    Source = #"RAW-Store",
+			    #"Renamed Columns" = Table.RenameColumns(Source,{{"Name", "Store"}}),
+			    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"StoreKey", Int64.Type}, {"Store Code", type text}, {"Country", type text}, {"State", type text}, {"Store", type text}, {"Square Meters", Int64.Type}, {"Open Date", type date}, {"Close Date", type date}, {"Status", type text}})
+			in
+			    #"Changed Type"
+
+
+	measure '# Stores' = COUNTROWS('Store')
+		formatString:= #,##0
+		lineageTag: 868df9c8-f579-47d1-a776-3d29121df7c7
+
+		changedProperty = FormatString
+
+	column StoreKey
+		dataType: Int64
+		formatString:= 0
+		isAvailableInMDX: false
+		isDataTypeInferred: false
+		isKey
+		lineageTag: b63bc7b8-266a-4424-9676-c3e68501b2ec
+		sourceColumn: StoreKey
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store Code'
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 307e3348-2132-4db3-b76a-771ac4561ef5
+		sourceColumn: "Store Code"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataCategory: Country
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 7564fe29-ad01-43e0-ba93-2e1634e1a9b3
+		sourceColumn: Country
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: f471c9c0-1924-46e4-99d8-59ccf0f64cba
+		sourceColumn: State
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Store
+		dataType: String
+		isDataTypeInferred: false
+		isDefaultLabel
+		lineageTag: 7bee915f-7eb7-4dbc-a16f-e796f410b3f5
+		sourceColumn: Store
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Square Meters'
+		dataType: Int64
+		formatString:= 0
+		isDataTypeInferred: false
+		lineageTag: 1596588a-acc4-41c4-a692-310fd28994bb
+		sourceColumn: "Square Meters"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Date'
+		dataType: DateTime
+		formatString:= Long Date
+		isDataTypeInferred: false
+		lineageTag: 66cf5168-4add-4a05-b2c8-0380a85b0539
+		sourceColumn: "Open Date"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Close Date'
+		dataType: DateTime
+		formatString:= Long Date
+		isDataTypeInferred: false
+		lineageTag: e627ea17-3b62-46f2-a2f4-549dc98beb06
+		sourceColumn: "Close Date"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Status
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 93122991-3d6a-413c-ad26-3610fa90013b
+		sourceColumn: Status
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	annotation PBI_ResultType = Table
+

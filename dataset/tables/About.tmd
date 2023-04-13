@@ -1,0 +1,59 @@
+/// Table with information about the model.
+/// Key/Value representation, with properties like: last refresh; model creator;...
+table About
+	lineageTag: 68907830-e8ac-4c12-98d9-f70711413080
+	ordinal: 8
+
+	partition 'About-77c21240-7751-4575-bf40-8c068bfd01cd' = M
+		mode: Import
+		attributes: ""
+		expression:=
+			let
+			
+			    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("NVA7bmMxDLzK4NXGQ3IHp9stk8ZwwUi0Q0ASFYk0ktsvlZftxCE1v8tlO/ODi3bOeP/eTttfSUOn3my7ni7bG48p2gJ/3p9+kDPPNKTbgf7RwRXSp1dkLTowxUCV7YSkbXIyNh+gLF1mknYHF4nlDL2sYPFZNcO49vgsLUmW7M3ghkLvQQ+2g5pR6d4IVOTTacergZvU4EaV9XjESPWET5eJptOGZ/AXjyRGyzC8FKpJD+Z1JFOW0g+l9DgGUxiv4UmPACFlO86LktwYMjycHFmlYXAf/MEt84jgATy0eA85DjuRFDwnI0kp/xuKQI6b34UMbRlCpxGDjx0vX4m7sa8aowNNiTjFXfIumWz9iBR9qGRuq8XVVIgmL51WbujtJkkImSePta1alg1aBUnUMX979bpv1+s/", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Key = _t, Value = _t]),
+			
+			    DynamicTable = Table.FromRows({{"Last Refresh", DateTime.ToText(DateTime.LocalNow(), "yyyy-MM-dd HH:mm:ss")}}, {"Key", "Value"}),
+			
+			    FinalTable = Table.Combine({Source, DynamicTable}),
+			
+			    #"Added Index" = Table.AddIndexColumn(FinalTable, "Order", 1, 1),
+			
+			    #"Changed Type" = Table.TransformColumnTypes(#"Added Index",{{"Key", type text},  {"Value", type text},{"Order", Int64.Type}}),
+			
+			    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type",{"Key", "Value", "Order"})
+			
+			in
+			
+			    #"Reordered Columns"
+
+
+	column Key
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 64fdcf75-33e0-4134-a5b8-677f8fefa7ed
+		sourceColumn: Key
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 41af608f-f46f-4878-be03-184d0cad44cf
+		sourceColumn: Value
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: Int64
+		formatString:= 0
+		isDataTypeInferred: false
+		lineageTag: 93bae8d8-9794-480e-8753-d51693dfa9ad
+		sourceColumn: Order
+		summarizeBy: Sum
+
+		annotation SummarizationSetBy = Automatic
+
+	annotation PBI_ResultType = Table
+

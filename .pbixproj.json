@@ -1,0 +1,40 @@
+{
+  "version": "0.12",
+  "created": "2022-05-25T15:24:03.2613259+01:00",
+  "deployments": {
+    "Files": {
+      "mode": "Dataset",
+      "source": {
+        "type": "Folder",
+        "path": "./dataset"
+      },
+      "authentication": {
+        "type": "ServicePrincipal",
+        "tenantId": "4a86d5bb-4173-45ee-bfd5-a3b56ee2d3d5",
+        "clientId": "4dafd220-5741-43df-ac9e-bffe0c650489",
+        "clientSecret": "%PBI_CLIENT_SECRET%"
+      },
+      "options": {        
+        "dataset": {
+          "replaceParameters": true,
+          "deployEmbeddedReport": false
+        }
+      },
+      "parameters": {        
+        "[Environment]": "{{ENVIRONMENT}}" 
+      },
+      "environments": {
+        "Development": {
+          "workspace": "TMDL {Dev}",
+          "displayName": "Sales",
+          "refresh": {}
+        },
+        "Production": {
+          "workspace": "TMDL {PRD}",
+          "displayName": "Sales",
+          "refresh": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,153 @@
+/// Customer data
+table Customer
+	lineageTag: 04227f5a-0aeb-4448-b5c5-dbf3e276da85
+	ordinal: 4
+
+	partition 'Customer-3757b886-e26c-4cec-a550-cdeea37b94d4' = M
+		mode: Import
+		attributes: ""
+		expression:=
+			let
+			    Source = #"RAW-Customer",
+			    #"Renamed Columns" = Table.RenameColumns(Source,{{"Name", "Customer"}}),
+			    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"CustomerKey", Int64.Type}, {"Gender", type text}, {"Customer", type text}, {"Address", type text}, {"City", type text}, {"State Code", type text}, {"State", type text}, {"Zip Code", type text}, {"Country Code", type text}, {"Country", type text}, {"Continent", type text}, {"Birthday", type datetime}, {"Age", Int64.Type}})
+			in
+			    #"Changed Type"
+
+
+	measure '# Customers' = COUNTROWS('Customer')
+		formatString:= #,##0
+		lineageTag: a8dc565a-aa9b-40dc-902c-1ba2596b0977
+
+	column CustomerKey
+		dataType: Int64
+		formatString:= 0
+		isAvailableInMDX: false
+		isDataTypeInferred: false
+		isKey
+		lineageTag: 901662ed-f0ae-41f6-96b3-4aa68bad1c7a
+		sourceColumn: CustomerKey
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 7e0ce5eb-3e63-4870-b30a-032f5186375d
+		sourceColumn: Gender
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer
+		dataType: String
+		isDataTypeInferred: false
+		isDefaultLabel
+		lineageTag: 8845f8b5-b069-41a0-8af8-12e402b113e9
+		sourceColumn: Customer
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: adbeb074-7c67-40ee-be2d-d46775ce5e17
+		sourceColumn: Address
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataCategory: City
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: a791eb8c-7fab-418d-844a-f8b094453037
+		sourceColumn: City
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Code'
+		dataCategory: StateOrProvince
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 29de3d16-fffa-4f61-8c39-c1a2a36d737a
+		sourceColumn: "State Code"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataCategory: StateOrProvince
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 923b4cc1-6137-4bb4-bcb2-3a90c5f76c5e
+		sourceColumn: State
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zip Code'
+		dataCategory: PostalCode
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 439ce0ee-437e-4770-90c4-c4d53ebfb35b
+		sourceColumn: "Zip Code"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Code'
+		dataCategory: Country
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: f3eea279-4255-446b-9f83-f40f66abf6d1
+		sourceColumn: "Country Code"
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataCategory: Country
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 99af44ae-86e9-4b75-98a3-e4b6e53fe806
+		sourceColumn: Country
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataCategory: Continent
+		dataType: String
+		isDataTypeInferred: false
+		lineageTag: 53b840d2-962c-44c4-8733-6cc003fb9a83
+		sourceColumn: Continent
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Birthday
+		dataType: DateTime
+		formatString:= General Date
+		isDataTypeInferred: false
+		lineageTag: afa5e191-c690-45c1-a725-41c9d3ca9434
+		sourceColumn: Birthday
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: Int64
+		formatString:= 0
+		isDataTypeInferred: false
+		lineageTag: 5c487309-c061-45ed-aa74-aba4d20bde3b
+		sourceColumn: Age
+		summarizeBy: None
+
+		annotation SummarizationSetBy = Automatic
+
+	annotation PBI_ResultType = Table
+
