@@ -4,7 +4,7 @@ name: Deploy
 on:
   pull_request:
     types:
-      - opened
+      - closed
     branches:
       - 'main'
     paths:
