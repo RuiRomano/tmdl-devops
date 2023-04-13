@@ -1,12 +1,14 @@
 name: Deploy
 
-# Run workflow when its a pull request into main
+# Run workflow when its a pull request into main with changes in /dataset
 on:
   pull_request:
     types:
       - opened
     branches:
       - 'main'
+    paths:
+      - 'dataset/**'
       
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
