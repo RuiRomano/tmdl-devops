@@ -1,0 +1,26 @@
+trigger:
+- main
+
+variables:
+  PROFILE: Datasets
+  ENVIRONMENT: Development
+
+jobs:
+  # https://docs.microsoft.com/azure/devops/pipelines/process/deployment-jobs
+- deployment: Deploy
+  displayName: Deploy to Environment
+  pool:
+    vmImage: ubuntu-latest
+  container: ghcr.io/pbi-tools/pbi-tools-core:latest
+  # Ensure the environment exists in the project, and the pipeline has been authorized to use it.
+  environment: $(ENVIRONMENT)
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+          lfs: true
+        - script: /app/pbi-tools/pbi-tools.core deploy . "$(PROFILE)" "$(ENVIRONMENT)"
+          displayName: 'pbi-tools Deploy'
+          env:
+            PBI_CLIENT_SECRET: $(PBI_CLIENT_SECRET)

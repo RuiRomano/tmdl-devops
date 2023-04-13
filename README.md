@@ -52,6 +52,8 @@ This repo includes a sample GitHub Workflow that deploys TMDL to a Premium Works
 
 ![image](./.images/GitHubWorkflowDeploy1.png)
 
+Sample pipeline for Azure DevOps Pipelines: [azure-pipelines.yml](./azure-pipelines.yml)
+
 # Deploy TMDL using Powershell
 
 See the following repo with an example on how to publish an serialize into TMDL using Powershell:
