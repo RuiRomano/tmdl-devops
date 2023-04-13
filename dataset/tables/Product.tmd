@@ -18,6 +18,9 @@ table Product
 	measure '# Products' = COUNTROWS('Product')
 		formatString:= #,##0
 		lineageTag: 1f8f1a2a-06b6-4989-8af7-212719cf3617
+	
+	measure '# Products (Black)' = Calculate([# Products], 'Product'[Color] = "Black")
+		formatString:= #,##0
 
 	column Product
 		dataType: String
