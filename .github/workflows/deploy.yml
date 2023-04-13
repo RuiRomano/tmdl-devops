@@ -1,0 +1,48 @@
+name: Deploy-DEV
+
+# Run workflow when its a pull request from a branch named Relese/*
+on:
+  pull_request:
+    branches:
+      - 'Release/*'  
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      whatIf:
+        description: 'Enable WhatIf Mode'
+        type: boolean
+        required: true
+        default: true
+
+env:
+  PROFILE: Datasets
+
+jobs:
+  Deployment:
+    runs-on: ubuntu-latest
+    environment: Development
+    container:
+      image: ghcr.io/pbi-tools/pbi-tools-core:latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: pbi-tools info
+        run: |
+          /app/pbi-tools/pbi-tools.core info
+
+      - name: pbi-tools deploy (WhatIf)
+        if: ${{ github.event.inputs.whatIf == 'true' }}
+        run: |
+          /app/pbi-tools/pbi-tools.core deploy . "$PROFILE" -whatIf
+        env:
+          PBI_CLIENT_SECRET: ${{ secrets.PBI_CLIENT_SECRET }}
+
+      - name: pbi-tools deploy
+        if: ${{ github.event.inputs.whatIf != 'true' }}
+        run: |
+          /app/pbi-tools/pbi-tools.core deploy . "$PROFILE"
+        env:
+          PBI_CLIENT_SECRET: ${{ secrets.PBI_CLIENT_SECRET }}
