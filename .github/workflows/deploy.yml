@@ -1,6 +1,6 @@
 name: Deploy
 
-# Run workflow when its a pull request from a branch named Relese/*
+# Run workflow when its a pull request from a branch named release/*
 on:
   pull_request:
     types:
@@ -17,7 +17,8 @@ on:
 
 env:
   PROFILE: Datasets
-
+  Environment: ${{ github.head_ref }}
+  
 jobs:    
   Deployment:
     runs-on: ubuntu-latest
@@ -30,6 +31,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Variables
+        run: echo "$Environment"
+        
       - name: pbi-tools info
         run: |
           /app/pbi-tools/pbi-tools.core info
