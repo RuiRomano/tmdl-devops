@@ -3,8 +3,8 @@ name: Deploy
 # Run workflow when its a pull request from a branch named Relese/*
 on:
   pull_request:
-    branches:
-      - 'Release/*'  
+    types:
+      - opened
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,9 +18,10 @@ on:
 env:
   PROFILE: Datasets
 
-jobs:
+jobs:    
   Deployment:
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'releases/')
     environment: Development
     container:
       image: ghcr.io/pbi-tools/pbi-tools-core:latest
