@@ -21,7 +21,7 @@ table Sales
 			    #"Changed Type3"
 
 
-	measure '# Customers (with Sales)' = DISTINCTCOUNT('Sales'[CustomerKey])
+	measure '# Customers (with Sales)' = DISTINCTCOUNT('Sales'[CustomerKey]) * 2
 		formatString:= #,##0
 		lineageTag: 4ec872f0-a42d-4aa9-bf6b-1ca7c4916336
 
